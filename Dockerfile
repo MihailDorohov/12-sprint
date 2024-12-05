@@ -1,4 +1,4 @@
-FROM golang:1.23
+FROM golang:1.23.3
 
 WORKDIR /app
 
@@ -12,6 +12,10 @@ COPY *.db ./
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /my_app
 
-CMD ["/my_app"] 
+FROM alpine:latest
 
-# add comment to do PR
+WORKDIR /root
+
+COPY --from=builder /app/myapp .
+
+CMD ["./my_app"] 
