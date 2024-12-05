@@ -30,20 +30,20 @@ jobs:
       - name: Test
         run: go test -v ./...
     
-      publish: 
-          needs: build
-          runs-on: ubuntu-latest 
-          steps: 
-            - name: Checkout code 
-              uses: actions/checkout@v4 
+  publish: 
+    needs: build
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout code 
+        uses: actions/checkout@v4 
           
-            - name: Log in to Docker Hub  
-              uses: docker/login-action@v2  
-              with:  
-                  username: ${{ secrets.NAME_DOCKER }}  
-                  password: ${{ secrets.PASS_DOCKER }} 
+      - name: Log in to Docker Hub  
+        uses: docker/login-action@v2  
+        with:  
+          username: ${{ secrets.NAME_DOCKER }}  
+          password: ${{ secrets.PASS_DOCKER }} 
       
-            - name: Build and push Docker image  
-              run: |
-                docker build -t ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
-                docker push ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
+      - name: Build and push Docker image  
+        run: |
+          docker build -t ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
+          docker push ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
