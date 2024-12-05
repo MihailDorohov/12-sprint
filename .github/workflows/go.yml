@@ -40,10 +40,10 @@ jobs:
       - name: Log in to Docker Hub  
         uses: docker/login-action@v2  
         with:  
-          username: ${{ secrets.NAME_DOCKER }}  
+          username: ${{ secrets.NAME_DOCKER_USER }}  
           password: ${{ secrets.PASS_DOCKER_1 }} 
       
       - name: Build and push Docker image  
         run: |
-          docker build -t ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
-          docker push ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
+          docker build -t ${{ secrets.NAME_DOCKER_USER }}/12-sprint:${{ github.ref_name }} .
+          docker push ${{ secrets.NAME_DOCKER_USER }}/12-sprint:${{ github.ref_name }} .
