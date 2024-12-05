@@ -3,7 +3,7 @@ name: Go Build
 on: 
   push:
     branches:
-      - pr
+      - first-iteration
     tags:
       - 'v'
 
