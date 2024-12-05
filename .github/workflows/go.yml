@@ -32,21 +32,21 @@ jobs:
       - name: Test
         run: go test -v ./...
     
-  publish: 
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest 
-    steps: 
-      - name: Checkout code 
-        uses: actions/checkout@v4 
-    
-      - name: Log in to Docker Hub  
-        uses: docker/login-action@v2  
-        with:  
-            username: ${{ secrets.FIRST_SECRET }}  
-            password: ${{ secrets.SECOND_SECRET }} 
-
-      - name: Build and push Docker image  
-        run: |
-          docker build -t 12-sprint:{{ github.ref_name }} .
-          docker push 12-sprint:{{ github.ref_name }}
+        publish: 
+          needs: build
+          if: startsWith(github.ref, 'refs/tags/')
+          runs-on: ubuntu-latest 
+          steps: 
+            - name: Checkout code 
+              uses: actions/checkout@v4 
+          
+            - name: Log in to Docker Hub  
+              uses: docker/login-action@v2  
+              with:  
+                  username: ${{ secrets.NAME_DOCKER }}  
+                  password: ${{ secrets.PASS_DOCKER }} 
+      
+            - name: Build and push Docker image  
+              run: |
+                docker build -t ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
+                docker push ${{ secrets.NAME_DOCKER }}/12-sprint:${{ github.ref_name }} .
