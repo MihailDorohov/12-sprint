@@ -39,8 +39,8 @@ jobs:
           - name: Log in to Docker Hub
             uses: docker/login-action@v3
             with:
-              username: ${{ secrets.NAME_DOCKER_USER }}
-              password: ${{ secrets.PASS_DOCKER_1 }}
+              username: ${{ secrets.USER_NAME }}
+              password: ${{ secrets.USER_PASS }}
     
           - name: Extract metadata (tags, labels) for Docker
             id: meta
