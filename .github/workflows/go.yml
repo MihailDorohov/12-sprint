@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - first-iteration
+    tags:
+      - 'v.*'
 
 jobs:
   build:
